@@ -154,14 +154,12 @@ function sizeOfText( $texte, $largeur )
 function addSociete( $nom, $adresse, $logo, $ext_logo  )
 {
     $x1 = 30;
-    $y1 = 4;
+    $y1 = 40;
     //Positionnement en bas
-    $this->Image($logo, 5 , 3 , 25 ,25, $ext_logo);
+    $this->Image($logo, 15 , 2 , 100 ,50, $ext_logo);
     $this->SetXY( $x1, $y1 );
     $this->SetFont('Arial','B',12);
-    $length = $this->GetStringWidth( $nom );
-    $this->Cell( $length, 2, $nom);
-    $this->SetXY( $x1, $y1 + 4 );
+    $this->SetXY( $x1, $y1 + 10 );
     $this->SetFont('Arial','',10);
     $length = $this->GetStringWidth( $adresse );
     //Coordonnées de la société
@@ -172,10 +170,10 @@ function addSociete( $nom, $adresse, $logo, $ext_logo  )
 // Label and number of invoice/estimate
 function fact_dev( $libelle, $num )
 {
-    $r1  = $this->w - 80;
-    $r2  = $r1 + 68;
-    $y1  = 6;
-    $y2  = $y1 + 2;
+    $r1  = $this->w - 100;
+    $r2  = $r1 + 50;
+    $y1  = 70;
+    $y2  = $y1 / 2;
     $mid = ($r1 + $r2 ) / 2;
     
     $texte  = $libelle . utf8_decode(" N° : ") . $num;    
@@ -215,8 +213,8 @@ function addFacture( $numfact )
 
 function addDate( $date )
 {
-    $r1  = $this->w - 80;
-    $r2  = $r1 + 68;
+    $r1  = $this->w - 50;
+    $r2  = $r1 + 25;
     $y1  = 17;
     $y2  = $y1 ;
     $mid = $y1 + ($y2 / 2);
@@ -364,7 +362,7 @@ function addCols( $tab )
     
     $r1  = 10;
     $r2  = $this->w - ($r1 * 2) ;
-    $y1  = 75;
+    $y1  = 90;
     $y2  = $this->h - 50 - $y1;
     $this->SetXY( $r1, $y1 );
     $this->Rect( $r1, $y1, $r2, $y2, "D");

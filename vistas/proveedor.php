@@ -73,7 +73,7 @@ if ($_SESSION['compras']==1) {
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Telefono</label>
-      <input class="form-control" type="number" name="telefono" id="telefono" maxlength="20" placeholder="Número de Telefono">
+      <input class="form-control" type="number" name="telefono" id="telefono" maxlength="10" placeholder="Número de Telefono" data-mask="000 0000 000" data-mask-reverse="false">
     </div>
         <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Email</label>
@@ -102,6 +102,7 @@ if ($_SESSION['compras']==1) {
 require 'footer.php';
  ?>
  <script src="scripts/proveedor.js"></script>
+    <script src="../public/js/jquery.mask.js"></script>
  <?php 
 }
 

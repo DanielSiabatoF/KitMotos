@@ -8,6 +8,7 @@ $idcategoria=isset($_POST["idcategoria"])? limpiarCadena($_POST["idcategoria"]):
 $codigo=isset($_POST["codigo"])? limpiarCadena($_POST["codigo"]):"";
 $nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
 $stock=isset($_POST["stock"])? limpiarCadena($_POST["stock"]):"";
+$money=isset($_POST["money"])? limpiarCadena($_POST["money"]):"";
 $descripcion=isset($_POST["descripcion"])? limpiarCadena($_POST["descripcion"]):"";
 $imagen=isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]):"";
 
@@ -24,10 +25,10 @@ switch ($_GET["op"]) {
 		}
 	}
 	if (empty($idarticulo)) {
-		$rspta=$articulo->insertar($idcategoria,$codigo,$nombre,$stock,$descripcion,$imagen);
+		$rspta=$articulo->insertar($idcategoria,$codigo,$nombre,$stock,$descripcion,$imagen,$money);
 		echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
 	}else{
-         $rspta=$articulo->editar($idarticulo,$idcategoria,$codigo,$nombre,$stock,$descripcion,$imagen);
+         $rspta=$articulo->editar($idarticulo,$idcategoria,$codigo,$nombre,$stock,$descripcion,$imagen,$money);
 		echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos";
 	}
 		break;
@@ -59,7 +60,7 @@ switch ($_GET["op"]) {
             "3"=>$reg->codigo,
             "4"=>$reg->stock,
             "5"=>"<img src='../files/articulos/".$reg->imagen."' height='50px' width='50px'>",
-            "6"=>$reg->descripcion,
+            "6"=>"$ ".number_format($reg->precio_venta),
             "7"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':'<span class="label bg-red">Desactivado</span>'
               );
 		}

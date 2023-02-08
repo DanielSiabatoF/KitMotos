@@ -136,11 +136,11 @@ switch ($_GET["op"]) {
 		in_array(1, $valores)?$_SESSION['escritorio']=1:$_SESSION['escritorio']=0;
 		in_array(2, $valores)?$_SESSION['almacen']=1:$_SESSION['almacen']=0;
 		in_array(3, $valores)?$_SESSION['compras']=1:$_SESSION['compras']=0;
-		in_array(4, $valores)?$_SESSION['ventas']=1:$_SESSION['ventas']=0;
+		in_array(4, $valores)?$_SESSION['autorizacion']=1:$_SESSION['autorizacion']=0;
 		in_array(5, $valores)?$_SESSION['acceso']=1:$_SESSION['acceso']=0;
 		in_array(6, $valores)?$_SESSION['consultac']=1:$_SESSION['consultac']=0;
 		in_array(7, $valores)?$_SESSION['consultav']=1:$_SESSION['consultav']=0;
-
+		in_array(8, $valores)?$_SESSION['ventasr']=1:$_SESSION['ventasr']=0;
 	}
 	echo json_encode($fetch);
 

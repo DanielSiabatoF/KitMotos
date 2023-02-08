@@ -21,16 +21,18 @@ function init(){
 function limpiar(){
 	$("#codigo").val("");
 	$("#nombre").val("");
+	$("#listadoregistros").val("");
 	$("#descripcion").val("");
 	$("#stock").val("");
 	$("#imagenmuestra").attr("src","");
 	$("#imagenactual").val("");
 	$("#print").hide();
 	$("#idarticulo").val("");
+	$("#money").val("");
 }
 
 //funcion mostrar formulario
-function mostrarform(flag){
+ function mostrarform(flag){
 	limpiar();
 	if(flag){
 		$("#listadoregistros").hide();

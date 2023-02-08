@@ -18,7 +18,10 @@ if ($_SESSION['almacen']==1) {
         <div class="col-md-12">
       <div class="box">
 <div class="box-header with-border">
-  <h1 class="box-title">Articulo <button class="btn btn-success" onclick="mostrarform(true)" id="btnagregar"><i class="fa fa-plus-circle"></i>Agregar</button> <a target="_blank" href="../reportes/rptarticulos.php"><button class="btn btn-info">Reporte</button></a></h1>
+  <h1 class="box-title">Articulo <button class="btn btn-success" onclick="mostrarform(true)" id="btnagregar">
+          <i class="fa fa-plus-circle"></i>Agregar</button>
+      <a target="_blank" href="../reportes/rptarticulos.php">
+          <button class="btn btn-info">Reporte</button></a></h1>
   <div class="box-tools pull-right">
     
   </div>
@@ -70,11 +73,15 @@ if ($_SESSION['almacen']==1) {
       <label for="">Descripcion</label>
       <input class="form-control" type="text" name="descripcion" id="descripcion" maxlength="256" placeholder="Descripcion">
     </div>
-        <div class="form-group col-lg-6 col-md-6 col-xs-12">
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Imagen:</label>
       <input class="form-control" type="file" name="imagen" id="imagen">
       <input type="hidden" name="imagenactual" id="imagenactual">
       <img src="" alt="" width="150px" height="120" id="imagenmuestra">
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
+          <label for="">Valor Venta(*)</label>
+          <input id="money" class="form-control" type="" name="money" data-mask="000'000'000.000" data-mask-reverse="true" required>
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Codigo:</label>
@@ -108,7 +115,8 @@ if ($_SESSION['almacen']==1) {
 require 'footer.php'
  ?>
  <script src="../public/js/JsBarcode.all.min.js"></script>
- <script src="../public/js/jquery.PrintArea.js"></script>
+ <script src="../public/js/jquery.mask.js"></script>
+    <script src="../public/js/jquery.PrintArea.js"></script>
  <script src="scripts/articulo.js"></script>
 
  <?php 

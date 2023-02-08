@@ -4,6 +4,7 @@ var tabla;
 function init(){
    mostrarform(false);
    listar();
+   listarAutorizaciones();
 
    $("#formulario").on("submit",function(e){
    	guardaryeditar(e);
@@ -72,7 +73,7 @@ function cancelarform(){
 	mostrarform(false);
 }
 
-//funcion listar
+//funcion listar ventas
 function listar(){
 	tabla=$('#tbllistado').dataTable({
 		"aProcessing": true,//activamos el procedimiento del datatable
@@ -93,6 +94,34 @@ function listar(){
 				console.log(e.responseText);
 			}
 		},
+		"bDestroy":true,
+		"iDisplayLength":5,//paginacion
+		"order":[[0,"desc"]]//ordenar (columna, orden)
+	}).DataTable();
+}
+
+//Listar Autorizaciones
+
+function listarAutorizaciones(){
+	tabla=$('#tbllistado').dataTable({
+		"aProcessing": true,//activamos el procedimiento del datatable
+		"aServerSide": true,//paginacion y filrado realizados por el server
+		dom: 'Bfrtip',//definimos los elementos del control de la tabla
+		buttons: [
+			'copyHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'pdf'
+		],
+		"ajax":
+			{
+				url:'../ajax/venta.php?op=listarAutorizaciones',
+				type: "get",
+				dataType : "json",
+				error:function(e){
+					console.log(e.responseText);
+				}
+			},
 		"bDestroy":true,
 		"iDisplayLength":5,//paginacion
 		"order":[[0,"desc"]]//ordenar (columna, orden)
@@ -172,6 +201,33 @@ function mostrar(idventa){
 
 }
 
+function actualizar(idventa){
+	$.post("../ajax/venta.php?op=mostrar",{idventa : idventa},
+		function(data,status)
+		{
+			data=JSON.parse(data);
+			mostrarform(true);
+
+			$("#idcliente").val(data.idcliente);
+			$("#idcliente").selectpicker('refresh');
+			$("#tipo_comprobante").val(data.tipo_comprobante);
+			$("#tipo_comprobante").selectpicker('refresh');
+			$("#serie_comprobante").val(data.serie_comprobante);
+			$("#num_comprobante").val(data.num_comprobante);
+			$("#fecha_hora").val(data.fecha);
+			$("#impuesto").val(data.impuesto);
+			$("#idventa").val(data.idventa);
+
+			//ocultar y mostrar los botones
+			$("#btnGuardar").hide();
+			$("#btnCancelar").show();
+			$("#btnAgregarArt").hide();
+		});
+	$.post("../ajax/venta.php?op=listarDetalle&id="+idventa,function(r){
+		$("#detalles").html(r);
+	});
+
+}
 
 //funcion para desactivar
 function anular(idventa){
