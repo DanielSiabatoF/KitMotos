@@ -17,6 +17,16 @@ $clave=isset($_POST["clave"])? limpiarCadena($_POST["clave"]):"";
 $imagen=isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]):"";
 
 switch ($_GET["op"]) {
+
+	case 'mostrarchat':
+		require_once "../modelos/Usuario.php";
+		$usuario = new Usuario();
+		$rspta=$usuario->mostrarchat();
+		while ($reg = $rspta->fetch_object()) {
+			echo '<option value=' . $reg->idmecanico . '>' . $reg->nombremecanico . '</option>';
+		}
+		break;
+
 	case 'guardaryeditar':
 
 	if (!file_exists($_FILES['imagen']['tmp_name'])|| !is_uploaded_file($_FILES['imagen']['tmp_name'])) {
@@ -141,6 +151,8 @@ switch ($_GET["op"]) {
 		in_array(6, $valores)?$_SESSION['consultac']=1:$_SESSION['consultac']=0;
 		in_array(7, $valores)?$_SESSION['consultav']=1:$_SESSION['consultav']=0;
 		in_array(8, $valores)?$_SESSION['ventasr']=1:$_SESSION['ventasr']=0;
+		in_array(9, $valores)?$_SESSION['personas']=1:$_SESSION['personas']=0;
+		in_array(10, $valores)?$_SESSION['ventasadmin']=1:$_SESSION['ventasadmin']=0;
 	}
 	echo json_encode($fetch);
 

@@ -3,7 +3,7 @@ var tabla;
 //funcion que se ejecuta al inicio
 function init(){
    mostrarform(false);
-   listar();
+   listarc();
 
    $("#formulario").on("submit",function(e){
    	guardaryeditar(e);
@@ -43,7 +43,7 @@ function cancelarform(){
 }
 
 //funcion listar
-function listar(){
+function listarc(){
 	tabla=$('#tbllistado').dataTable({
 		"aProcessing": true,//activamos el procedimiento del datatable
 		"aServerSide": true,//paginacion y filrado realizados por el server
@@ -123,5 +123,17 @@ function eliminar(idpersona){
 	})
 }
 
+function enviarmoto(idmoto){
+	$.ajax({
+		url:"../vistas/ventar.php",
+		type: "POST",
+		data: {
+			idmoto: idmoto
+		},
+		success: function(respuesta){
+			window.location.href = 'ventar.php';
+		}
+	});
+}
 
 init();

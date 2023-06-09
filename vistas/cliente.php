@@ -2,6 +2,7 @@
 //activamos almacenamiento en el buffer
 ob_start();
 session_start();
+
 if (!isset($_SESSION['nombre'])) {
     header("Location: login.html");
 } else {
@@ -18,7 +19,7 @@ if (!isset($_SESSION['nombre'])) {
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Clientes
+                                <h1 class="box-title"><i class="fa fa-user"></i> Clientes
                                     <button class="btn btn-success" onclick="mostrarform(true)"><i
                                                 class="fa fa-plus-circle"></i>Agregar
                                     </button>
@@ -58,7 +59,7 @@ if (!isset($_SESSION['nombre'])) {
                                         <label for="">Nombre</label>
                                         <input class="form-control" type="hidden" name="idpersona" id="idpersona">
                                         <input class="form-control" type="hidden" name="tipo_persona" id="tipo_persona"
-                                               value="Cliente">
+                                               value="2">
                                         <input class="form-control" type="text" name="nombre" id="nombre"
                                                maxlength="100" placeholder="Nombre del cliente" required>
                                     </div>
@@ -66,14 +67,14 @@ if (!isset($_SESSION['nombre'])) {
                                         <label for="">Tipo Dcumento</label>
                                         <select class="form-control select-picker" name="tipo_documento"
                                                 id="tipo_documento" required>
-                                            <option value="DNI">CC</option>
-                                            <option value="RUC">NIT</option>
-                                            <option value="CEDULA">CE</option>
+                                            <option value="Cedula de Ciudadania">CC</option>
+                                            <option value="NIT">NIT</option>
+                                            <option value="Cedula de Extrangeria">CE</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-6 col-md-6 col-xs-12">
                                         <label for="">Número Documento</label>
-                                        <input class="form-control" type="text" name="num_documento" id="num_documento"
+                                        <input class="form-control" type="number" name="num_documento" id="num_documento"
                                                maxlength="20" placeholder="Número de Documento">
                                     </div>
                                     <div class="form-group col-lg-6 col-md-6 col-xs-12">

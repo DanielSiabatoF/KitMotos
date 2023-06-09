@@ -63,6 +63,11 @@ public function mostrar($idusuario){
 	return ejecutarConsultaSimpleFila($sql);
 }
 
+	public function mostrarchat($idusuario){
+		$sql="SELECT * FROM usuario WHERE idusuario=!'$idusuario'";
+		return ejecutarConsultaSimpleFila($sql);
+	}
+
 //listar registros
 public function listar(){
 	$sql="SELECT * FROM usuario";

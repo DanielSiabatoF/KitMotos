@@ -52,11 +52,11 @@ if ($_SESSION['compras']==1) {
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Nombre</label>
       <input class="form-control" type="hidden" name="idpersona" id="idpersona">
-      <input class="form-control" type="hidden" name="tipo_persona" id="tipo_persona" value="Proveedor">
+      <input class="form-control" type="hidden" name="tipo_persona" id="tipo_persona" value="3">
       <input class="form-control" type="text" name="nombre" id="nombre" maxlength="100" placeholder="Nombre del proveedor" required>
     </div>
      <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Tipo Dcumento *</label>
+      <label for="">Tipo Documento *</label>
      <select class="form-control select-picker" name="tipo_documento" id="tipo_documento" required>
        <option value="NIT">NIT</option>
        <option value="CEDULA">CEDULA</option>

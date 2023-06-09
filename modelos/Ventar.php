@@ -13,16 +13,110 @@ class Ventar
     }
 
 //metodo insertar registro
-    public function insertar($idcliente, $idusuario, $tipo_comprobante, $placa, $moto, $fecha_hora, $impuesto, $total_venta, $idarticulo, $cantidad, $precio_venta, $descuento)
+    public function insertarVenta($idcliente,
+                             $idusuario,
+                             $tipo_comprobante,
+                             $placa,
+                             $moto,
+                             $fecha_hora,
+                             $impuesto,
+                             $total_venta,
+                             $idarticulo,
+                             $cantidad,
+                             $precio_venta,
+                             $descuento)
     {
-        $sql = "INSERT INTO venta (idcliente,idusuario,tipo_comprobante,placa,moto,fecha_hora,impuesto,total_venta,estado) VALUES ('$idcliente','$idusuario','$tipo_comprobante','$placa','$moto','$fecha_hora','$impuesto','$total_venta','Pagado')";
+        $sql = "INSERT INTO venta (
+                   idmoto,
+                   idusuario,
+                   idmecanico,
+                   placa,
+                   moto,
+                   fecha_hora,
+                   impuesto,
+                   total_venta,
+                   estado)
+                VALUES ('$idcliente',
+                        '$idusuario',
+                        '$tipo_comprobante',
+                        '$placa',
+                        '$moto',
+                        '$fecha_hora',
+                        '$impuesto',
+                        '$total_venta',
+                        'Pagado')";
+        //return ejecutarConsulta($sql);
+        $idventanew = ejecutarConsulta_retornarID($sql);
+        $num_elementos = 0;
+        $sw = true;
+        while ($num_elementos < count($idarticulo)) {
+            $sql_detalle = "INSERT INTO detalle_venta (idventa,
+                           idarticulo,
+                           cantidad,
+                           precio_venta,
+                           descuento)
+                            VALUES('$idventanew',
+                                   '$idarticulo[$num_elementos]',
+                                   '$cantidad[$num_elementos]',
+                                   '$precio_venta[$num_elementos]',
+                                   '$descuento[$num_elementos]')";
+
+            ejecutarConsulta($sql_detalle) or $sw = false;
+
+            $num_elementos = $num_elementos + 1;
+        }
+        return $sw;
+    }
+
+    //metodo insertar registro
+    public function insertarVentaTemp($idcliente,
+                                  $idusuario,
+                                  $tipo_comprobante,
+                                  $placa,
+                                  $moto,
+                                  $fecha_hora,
+                                  $impuesto,
+                                  $total_venta,
+                                  $idarticulo,
+                                  $cantidad,
+                                  $precio_venta,
+                                  $descuento)
+    {
+        $sql = "INSERT INTO venta (
+                   idcliente,
+                   idusuario,
+                   tipo_comprobante,
+                   placa,
+                   moto,
+                   fecha_hora,
+                   impuesto,
+                   total_venta,
+                   estado)
+                VALUES ('$idcliente',
+                        '$idusuario',
+                        '$tipo_comprobante',
+                        '$placa',
+                        '$moto',
+                        '$fecha_hora',
+                        '$impuesto',
+                        '$total_venta',
+                        'Pagado')";
         //return ejecutarConsulta($sql);
         $idventanew = ejecutarConsulta_retornarID($sql);
         $num_elementos = 0;
         $sw = true;
         while ($num_elementos < count($idarticulo)) {
 
-            $sql_detalle = "INSERT INTO detalle_venta (idventa,idarticulo,cantidad,precio_venta,descuento) VALUES('$idventanew','$idarticulo[$num_elementos]','$cantidad[$num_elementos]','$precio_venta[$num_elementos]','$descuento[$num_elementos]')";
+            $sql_detalle = "INSERT INTO detalle_venta (idventa,
+                           idarticulo,
+                           cantidad,
+                           precio_venta,
+                           descuento)
+                            VALUES('$idventanew',
+                                   '$idarticulo[$num_elementos]',
+                                   '$cantidad[$num_elementos]',
+                                   '$precio_venta[$num_elementos]',
+                                   '$descuento[$num_elementos]')";
 
             ejecutarConsulta($sql_detalle) or $sw = false;
 
@@ -37,18 +131,59 @@ class Ventar
         return ejecutarConsulta($sql);
     }
 
+    public function eliminarArticulo($idventa, $iddetalle_venta)
+    {
+        $sql = "UPDATE venta SET estado='Anulado'
+             WHERE idventa='$idventa'
+               and iddetalle_venta='$iddetalle_venta'";
+        return ejecutarConsulta($sql);
+    }
+
 
 //implementar un metodopara mostrar los datos de unregistro a modificar
     public function mostrar($idventa)
     {
-        $sql = "SELECT v.idventa,DATE(v.fecha_hora) as fecha,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre as usuario, v.tipo_comprobante,v.placa,v.moto,v.total_venta,v.impuesto,v.estado FROM venta v INNER JOIN persona p ON v.idcliente=p.idpersona INNER JOIN usuario u ON v.idusuario=u.idusuario WHERE idventa='$idventa'";
+        $sql = "SELECT v.idventa,
+                DATE(v.fecha_hora) as fecha,
+                v.idcliente,
+                p.nombre as cliente,
+                u.idusuario,
+                u.nombre as usuario,
+                v.tipo_comprobante,
+                v.placa,
+                v.moto,
+                v.total_venta,
+                v.impuesto,
+                v.estado
+                FROM venta v
+                INNER JOIN persona p ON v.idcliente=p.idpersona
+                INNER JOIN usuario u ON v.idusuario=u.idusuario
+                WHERE idventa='$idventa'";
         return ejecutarConsultaSimpleFila($sql);
+    }
+
+    //implementar un metodopara mostrar los datos de unregistro a modificar
+    public function mostrarclientemotos($idmoto)
+    {
+        $sql = "SELECT * FROM motos m 
+        INNER JOIN persona p ON m.idcliente=p.idpersona
+        WHERE idmoto='$idmoto'";
+        return ejecutarConsultaSimpleFila($sql);
+        
     }
 
     public function listarDetalle($idventa)
     {
-        $sql = "SELECT dv.idventa,dv.idarticulo,a.nombre,dv.cantidad,dv.precio_venta,dv.descuento,(dv.cantidad*a.precio_venta-dv.descuento) as subtotal
-	FROM detalle_venta dv INNER JOIN articulo a ON dv.idarticulo=a.idarticulo WHERE dv.idventa='$idventa'";
+        $sql = "SELECT dv.idventa,
+       dv.idarticulo,
+       a.nombre,
+       dv.cantidad,
+       dv.precio_venta,
+       dv.descuento,
+       (dv.cantidad*a.precio_venta-dv.descuento) as subtotal
+        FROM detalle_venta dv
+        INNER JOIN articulo a ON dv.idarticulo=a.idarticulo
+        WHERE dv.idventa='$idventa'";
         return ejecutarConsulta($sql);
     }
 
@@ -73,6 +208,11 @@ class Ventar
         return ejecutarConsulta($sql);
     }
 
+    public function selectProcesos()
+    {
+        $sql="SELECT * FROM tipo_procedimiento";
+        return ejecutarConsulta($sql);
+    }
 
 }
 

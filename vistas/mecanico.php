@@ -18,7 +18,7 @@ if (!isset($_SESSION['nombre'])) {
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Clientes
+                                <h1 class="box-title"><i class="fa fa-wrench"></i> Mecánicos
                                     <button class="btn btn-success" onclick="mostrarform(true)"><i
                                                 class="fa fa-plus-circle"></i>Agregar
                                     </button>
@@ -38,7 +38,7 @@ if (!isset($_SESSION['nombre'])) {
                                     <th>Documento</th>
                                     <th>Numero</th>
                                     <th>Telefono</th>
-                                    <th>Email</th>
+                                    <th>Asignación</th>
                                     </thead>
                                     <tbody>
                                     </tbody>
@@ -48,7 +48,7 @@ if (!isset($_SESSION['nombre'])) {
                                     <th>Documento</th>
                                     <th>Numero</th>
                                     <th>Telefono</th>
-                                    <th>Email</th>
+                                    <th>Asignación</th>
                                     </tfoot>
                                 </table>
                             </div>
@@ -56,14 +56,14 @@ if (!isset($_SESSION['nombre'])) {
                                 <form action="" name="formulario" id="formulario" method="POST">
                                     <div class="form-group col-lg-6 col-md-6 col-xs-12">
                                         <label for="">Nombre</label>
-                                        <input class="form-control" type="hidden" name="idpersona" id="idpersona">
+                                        <input class="form-control" type="hidden" name="idmecanico" id="idmecanico">
                                         <input class="form-control" type="hidden" name="tipo_persona" id="tipo_persona"
-                                               value="2">
-                                        <input class="form-control" type="text" name="nombre" id="nombre"
-                                               maxlength="100" placeholder="Nombre del cliente" required>
+                                               value="1">
+                                        <input class="form-control" type="text" name="nombremecanico" id="nombremecanico"
+                                               maxlength="100" placeholder="Nombre Mecanico" required>
                                     </div>
                                     <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                        <label for="">Tipo Dcumento</label>
+                                        <label for="">Tipo Documento</label>
                                         <select class="form-control select-picker" name="tipo_documento"
                                                 id="tipo_documento" required>
                                             <option value="Cedula de Ciudadania">CC</option>
@@ -118,7 +118,7 @@ if (!isset($_SESSION['nombre'])) {
     }
     require 'footer.php';
     ?>
-    <script src="scripts/cliente.js"></script>
+    <script src="scripts/mecanico.js"></script>
     <script src="../public/js/jquery.mask.js"></script>
     <?php
 }

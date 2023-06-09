@@ -22,7 +22,18 @@ $total_venta=isset($_POST["total_venta"])? limpiarCadena($_POST["total_venta"]):
 switch ($_GET["op"]) {
 	case 'guardaryeditar':
 	if (empty($idventa)) {
-		$rspta=$venta->insertar($idcliente,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_venta,$_POST["idarticulo"],$_POST["cantidad"],$_POST["precio_venta"],$_POST["descuento"]); 
+		$rspta=$venta->insertar($idcliente,
+            $idusuario,
+            $tipo_comprobante,
+            $serie_comprobante,
+            $num_comprobante,
+            $fecha_hora,
+            $impuesto,
+            $total_venta,
+            $_POST["idarticulo"],
+            $_POST["cantidad"],
+            $_POST["precio_venta"],
+            $_POST["descuento"]);
 		echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
 	}else{
         

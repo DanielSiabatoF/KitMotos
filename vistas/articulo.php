@@ -37,7 +37,7 @@ if ($_SESSION['almacen']==1) {
       <th>Codigo</th>
       <th>Stock</th>
       <th>Imagen</th>
-      <th>Descripcion</th>
+      <th>Valor venta</th>
       <th>Estado</th>
     </thead>
     <tbody>
@@ -49,7 +49,7 @@ if ($_SESSION['almacen']==1) {
       <th>Codigo</th>
       <th>Stock</th>
       <th>Imagen</th>
-      <th>Descripcion</th>
+      <th>Valor venta</th>
       <th>Estado</th>
     </tfoot>   
   </table>
@@ -81,7 +81,7 @@ if ($_SESSION['almacen']==1) {
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
           <label for="">Valor Venta(*)</label>
-          <input id="money" class="form-control" type="" name="money" data-mask="000'000'000.000" data-mask-reverse="true" required>
+          <input id="money" class="form-control" type="number" name="money" required>
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Codigo:</label>

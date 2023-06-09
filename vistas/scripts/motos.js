@@ -3,22 +3,28 @@ var tabla;
 //funcion que se ejecuta al inicio
 function init(){
    mostrarform(false);
-   listarme();
+   listarm();
 
    $("#formulario").on("submit",function(e){
    	guardaryeditar(e);
    });
+
+    //cargamos los items al celect categoria
+	$.post("../ajax/persona.php?op=selectcliente", function(r){
+    $("#idcliente").html(r);
+    $("#idcliente").selectpicker('refresh');
+    });
 }
 
 //funcion limpiar
 function limpiar(){
 
-	$("#nombremecanico").val("");
+	$("#nombre").val("");
 	$("#num_documento").val("");
 	$("#direccion").val("");
 	$("#telefono").val("");
 	$("#email").val("");
-	$("#idmecanico").val("");
+	$("#idpersona").val("");
 }
 
 //funcion mostrar formulario 
@@ -43,7 +49,7 @@ function cancelarform(){
 }
 
 //funcion listar
-function listarme(){
+function listarm(){
 	tabla=$('#tbllistado').dataTable({
 		"aProcessing": true,//activamos el procedimiento del datatable
 		"aServerSide": true,//paginacion y filrado realizados por el server
@@ -56,7 +62,7 @@ function listarme(){
 		],
 		"ajax":
 		{
-			url:'../ajax/persona.php?op=listarme',
+			url:'../ajax/persona.php?op=listarm',
 			type: "get",
 			dataType : "json",
 			error:function(e){
@@ -75,7 +81,7 @@ function guardaryeditar(e){
      var formData=new FormData($("#formulario")[0]);
 
      $.ajax({
-     	url: "../ajax/persona.php?op=guardaryeditarme",
+     	url: "../ajax/persona.php?op=guardaryeditarm",
      	type: "POST",
      	data: formData,
      	contentType: false,
@@ -91,21 +97,23 @@ function guardaryeditar(e){
      limpiar();
 }
 
-function mostrar(idmecanico){
-	$.post("../ajax/persona.php?op=mostrarme",{idmecanico : idmecanico},
+function mostrar(idmoto){
+	$.post("../ajax/persona.php?op=mostrarm",{idmoto : idmoto},
 		function(data,status)
 		{
 			data=JSON.parse(data);
 			mostrarform(true);
-
-			$("#nombremecanico").val(data.nombremecanico);
-			$("#tipo_documento").val(data.tipo_documento);
-			$("#tipo_documento").selectpicker('refresh');
-			$("#num_documento").val(data.num_documento);
-			$("#direccion").val(data.direccion);
-			$("#telefono").val(data.telefono);
-			$("#email").val(data.email);
-			$("#idpersona").val(data.idpersona);
+			$("#idcliente").val(data.idcliente);
+			$("#idcliente").selectpicker('refresh');
+			$("#clasevehiculo").val(data.clasevehiculo);
+			$("#clasevehiculo").selectpicker('refresh');
+			$("#placa").val(data.placa);
+			$("#marca").val(data.marca);
+			$("#linea").val(data.linea);
+			$("#modelo").val(data.modelo);
+			$("#cilindraje").val(data.cilindraje);
+			$("#color").val(data.color);
+			$("#kilometraje").val(data.kilometraje);
 		})
 }
 
@@ -123,5 +131,17 @@ function eliminar(idpersona){
 	})
 }
 
+function enviarmoto(idmoto){
+	$.ajax({
+		url:"../vistas/ventar.php",
+		type: "POST",
+		data: {
+			idmoto: idmoto
+		},
+		success: function(respuesta){
+			window.location.href = 'ventar.php';
+		}
+	});
+}
 
 init();

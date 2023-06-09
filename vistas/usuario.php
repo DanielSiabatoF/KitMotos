@@ -93,7 +93,7 @@ if ($_SESSION['acceso']==1) {
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Clave(*):</label>
-      <input class="form-control" type="password" name="clave" id="clave" maxlength="64" placeholder="Clave">
+      <input class="form-control" type="text" name="clave" id="clave" maxlength="64" placeholder="Clave">
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label>Permisos</label>

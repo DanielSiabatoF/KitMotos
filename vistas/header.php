@@ -1,7 +1,10 @@
 <?php
 if (strlen(session_id()) < 1)
     session_start();
-
+    header('Access-Control-Allow-Origin: *');
+    header("Access-Control-Allow-Headers: X-API-KEY, Origin, Authorization,X-Requested-With, Content-Type, Accept,Access-Control-Request-Method");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+    header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,13 +12,8 @@ if (strlen(session_id()) < 1)
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Taller Kit Motos</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <script src="http://code.jquery.com/jquery-git.js"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <link href="Kitmotos.ico" rel="shortcut icon">
-    <meta charset="UTF-8">
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/chat.min.css">
     <!-- Font Awesome -->
 
     <link rel="stylesheet" href="../public/css/font-awesome.min.css">
@@ -38,8 +36,6 @@ if (strlen(session_id()) < 1)
     <header class="main-header">
         <!-- Logo -->
         <a href="escritorio.php" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="fa fa-motorcycle"><b> Taller KitMotos</b></span>
             <!-- logo for regular state and mobile devices -->
             <span class="fa fa-motorcycle"><b> Taller KitMotos</b></span>
         </a>
@@ -125,6 +121,22 @@ if (strlen(session_id()) < 1)
                 }
                 ?>
                 <?php
+                if ($_SESSION['personas'] == 1) {
+                    echo ' <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Personas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="cliente.php"><i class="fa fa-user"></i> Clientes</a></li>
+            <li><a href="mecanico.php"><i class="fa fa-wrench"></i> Mecánicos</a></li>
+          </ul>
+        </li>';
+                }
+                ?>
+                <?php
                 if ($_SESSION['compras'] == 1) {
                     echo ' <li class="treeview">
           <a href="#">
@@ -140,25 +152,6 @@ if (strlen(session_id()) < 1)
         </li>';
                 }
                 ?>
-
-                <?php
-                if ($_SESSION['autorizacion'] == 1) {
-                    echo '<li class="treeview">
-          <a href="#">
-            <i class="fa fa-shopping-cart"></i> <span>Ventas</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="autorizacion.php"><i class="fa fa-circle-o"></i> Autorizaciones</a></li>
-            <li><a href="ventaadmin.php"><i class="fa fa-circle-o"></i> Ventas</a></li>
-            <li><a href="cliente.php"><i class="fa fa-circle-o"></i> Clientes</a></li>
-          </ul>
-        </li>';
-                }
-                ?>
-
                 <?php
                 if ($_SESSION['ventasr'] == 1) {
                     echo '<li class="treeview">
@@ -169,8 +162,26 @@ if (strlen(session_id()) < 1)
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="ventar.php"><i class="fa fa-circle-o"></i> ventas</a></li>
-            <li><a href="cliente.php"><i class="fa fa-circle-o"></i> clientes</a></li>
+          <li><a href="motos.php"><i class="fa fa-motorcycle"></i> Motos</a></li>
+          <li><a href="ventar.php"><i class="fa fa-wrench"></i>Crear venta</a></li>
+          <li><a href="ventar.php"><i class="fa fa-shopping-cart"></i>Ventas pendientes</a></li>
+          <li><a href="ventar.php"><i class="fa fa-archive"></i>Ventas Finalizadas</a></li>
+          </ul>
+        </li>';
+                }
+                ?>
+
+                <?php
+                if ($_SESSION['ventasadmin'] == 1) {
+                    echo '<li class="treeview">
+          <a href="#">
+            <i class="fa fa-shopping-cart"></i> <span>Ventas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="ventar.php"><i class="fa fa-circle-o"></i> Ventas</a></li>
           </ul>
         </li>';
                 }

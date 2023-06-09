@@ -1,0 +1,251 @@
+#chat{
+    position: fixed;
+    bottom:0;
+    right:15px;
+}
+
+#chat-header{
+    cursor: pointer;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+    background-color: #45b4ff;
+    color:#fff;''
+margin:auto;
+}
+
+#chat-header span{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+#chat-body{
+    height: 400px;
+    padding: 10px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    background-color: #ddd;
+}
+
+.user-info{
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    padding:7px 0;
+}
+
+.user-info:hover{
+    background-color: #fff;
+}
+.user-info img{
+    width: 40px;
+    height: 40px;
+}
+
+.user-info .name{
+    position:absolute;
+    margin-top:5px;
+}
+
+
+.popup-box
+{
+    display: none;
+    position: fixed;
+    bottom: 0px;
+    right: 220px;
+    background-color: rgb(237, 239, 244);
+    width: 300px;
+    border: 1px solid rgba(29, 49, 91, .3);
+    z-index: 10000;
+}
+
+.popup-head{
+    height: 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.popup-messages{
+    height: 250px;
+}
+
+.popup-box .popup-head
+{
+    background-color: #C0392B;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    clear: both;
+}
+
+.popup-box .popup-head .popup-head-left
+{
+    float: left;
+}
+
+.popup-box .popup-head .popup-head-left span
+{
+    position: absolute;
+}
+
+
+.profimage{
+    margin-right:10px;
+    margin-top:-4px;
+    padding:0;
+    width:25px;
+    height:25px;
+}
+
+
+.popup-box .popup-head .popup-head-right
+{
+    opacity: 0.5;
+    position: absolute;
+    right: 20px;
+    color: #fff;
+    z-index:1000;
+}
+
+.popup-head-right a{
+    position: absolute;
+    right: 0;
+    margin: 0;
+    margin-top: -1px;
+    color:#fff;
+    font-size: 16px;
+}
+
+.popup-head-right a:hover{
+    color:#ccc;
+}
+
+.user_messages{
+    max-height: 185px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.textarea-div{
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+}
+
+
+.msg_input{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    border: 0px;
+    border-top: 1px solid #555;
+    resize: none;
+}
+
+
+/***
+Chats
+***/
+.chats {
+    margin:0;
+    padding: 0;
+    margin-top: -15px;
+}
+
+.chats li {
+    list-style: none;
+    padding: 5px 0;
+    margin: 10px auto;
+    font-size: 12px;
+}
+
+.chats li img.avatar {
+    height: 30px;
+    width: 30px;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+
+.chats li.in img.avatar {
+    float: left;
+    margin-right: 5px;
+}
+
+.chats li .name {
+    color:#3590c1;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.chats li .datetime {
+    color:#333;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.chats li.out img.avatar {
+    float: right;
+    margin-left: 5px;
+}
+
+.chats li .message {
+    display: block;
+    padding: 5px;
+    position: relative;
+}
+
+.chats li.in .message {
+    text-align: left;
+    border-left: 2px solid #35aa47;
+    margin-left: 45px;
+    background: #fafafa
+}
+
+.chats li.in .message .arrow {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -8px;
+    width: 0;
+    height: 0;
+
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #35aa47;
+}
+
+.chats li.out .message .arrow {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: -8px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #da4a38;
+}
+
+.chats li.out .message {
+    border-right: 2px solid #da4a38;
+    margin-right: 45px;
+    background: #fafafa;
+    text-align: right;
+}
+
+.chats li.out .name,
+.chats li.out .datetime  {
+    text-align: right;
+}
+
+.chats li .message .body {
+    display: block;
+    font-size: 15.5px;
+    word-wrap: break-word;
+}
